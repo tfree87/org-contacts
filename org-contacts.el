@@ -93,35 +93,32 @@ When set to nil, all your Org files will be used."
 When set to nil, all your Org files will be used."
   :type '(repeat file))
 
-(defcustom org-contacts-email-property "EMAIL"
-  "Name of the property for contact email address."
+(defcustom org-contacts-nickname-property "NICKNAME"
+  "Name of the property for IRC nickname match."
   :type 'string)
 
-(defcustom org-contacts-tel-property "PHONE"
-  "Name of the property for contact phone number."
+(defcustom org-contacts-address-default-property "ADDRESS"
+  "The default address name used for templates."
   :type 'string)
 
-(defcustom org-contacts-address-property "ADDRESS"
-  "Name of the property for contact address."
-  :type 'string)
+(defcustom org-contacts-address-properties '("ADDRESS"
+                                             "OTHER_ADDRESS"
+                                             "HOME_ADDRESS"
+                                             "WORK_ADDRESS")
+  "A list of properties defining addresses for the contact."
+  :type '(repeat string))
 
-(defcustom org-contacts-birthday-property "BIRTHDAY"
-  "Name of the property for contact birthday date."
-  :type 'string)
-
-(defcustom org-contacts-note-property "NOTE"
-  "Name of the property for contact note."
-  :type 'string)
-
-(defcustom org-contacts-alias-property "ALIAS"
+(defcustom org-contacts-alias-default-property "ALIAS"
   "Name of the property for contact name alias."
   :type 'string)
 
-(defcustom org-contacts-ignore-property "IGNORE"
-  "Name of the property which values ignored when completing or exporting to vCard."
-  :type 'string)
+(defcustom org-contacts-alias-properties '("ALIAS"
+                                           "AKA"
+                                           "NICKNAME")
+  "A list of properties defining aliases for the contact."
+  :type '(repeat string))
 
-(defcustom org-contacts-birthday-format "Birthday: %l (%Y)"
+(defcustom org-contacts-anniv-format "Anniversary: %l (%Y)"
   "Format of the anniversary agenda entry.
 The following replacements are available:
 
@@ -131,16 +128,124 @@ The following replacements are available:
   %Y - Number of year (ordinal)"
   :type 'string)
 
+(defcustom org-contacts-anniv-default-property "ANNIVERSARY"
+  "The default anniversary name used for templates."
+  :type 'string)
+
+(defcustom org-contacts-anniv-properties '("ANNIVERSARY"
+                                           "WEDDING_ANNIVERSARY"
+                                           "WORK_ANNIVERSARY")
+  "A list of properties defining anniversary dates for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-birthday-format "Birthday: %l (%Y)"
+  "Format of the birthday anniversary agenda entry.
+The following replacements are available:
+
+  %h - Heading name
+  %l - Link to the heading
+  %y - Number of year
+  %Y - Number of year (ordinal)"
+  :type 'string)
+
+(defcustom org-contacts-birthday-default-property "BIRTHDAY"
+  "Name of the property for contact birthday date."
+  :type 'string)
+
+(defcustom org-contacts-birthday-properties '("BIRTHDAY")
+  "A list of properties defining companies for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-company-default-property "COMPANY"
+  "The default company property name used for templates."
+  :type 'string)
+
+(defcustom org-contacts-company-properties '("COMPANY"
+                                             "EMPLOYER")
+  "A list of properties defining companies for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-dept-default-property "DEPARTMENT"
+  "The default department property name used for templates."
+  :type 'string)
+
+(defcustom org-contacts-dept-properties '("DEPARTMENT"
+                                          "BRANCH"
+                                          "SUBDIVISION")
+  "A list of properties defining dpartments for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-email-default-property "EMAIL"
+  "The default email name used for templates."
+  :type 'string)
+
+(defcustom org-contacts-email-properties '("EMAIL"
+                                           "WORK_EMAIL"
+                                           "PERSONAL_EMAIL"
+                                           "OTHER_EMAIL")
+  "A list of properties defining email addresses for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-irc-property "IRC"
+  "The default property defining the contact's IRC nickname."
+  :type 'string)
+
+(defcustom org-contacts-job-default-property "JOB_TITLE"
+  "The default job title used for templates."
+  :type 'string)
+
+(defcustom org-contacts-job-properties '("JOB_TITLE"
+                                         "ROLE"
+                                         "RESPONSIBILITY")
+  "A list of properties defining job titles for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-chat-default-property "MESSENGER"
+  "The default chat nickname used for templates."
+  :type 'string)
+
+(defcustom org-contacts-chat-properties '("MESSENGER"
+                                          "BONJOUR"
+                                          "IRC"
+                                          "JABBER"
+                                          "SKYPE")
+  "A list of properties defining chat nicknames for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-note-default-property "NOTE"
+  "Name of the property for contact note."
+  :type 'string)
+
+(defcustom org-contacts-tel-properties '("PHONE"
+                                         "WORK_PHONE"
+                                         "MOBILE_PHONE"
+                                         "HOME_PHONE"
+                                         "OTHER_PHONE")
+  "A list of properties defining telephone addresses for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-tel-default-property "PHONE"
+  "The default telephone number name used for templates."
+  :type 'string)
+
+(defcustom org-contacts-tel-properties '("PHONE"
+                                         "WORK_PHONE"
+                                         "MOBILE_PHONE"
+                                         "HOME_PHONE"
+                                         "OTHER_PHONE")
+  "A list of properties defining telephone addresses for the contact."
+  :type '(repeat string))
+
+(defcustom org-contacts-ignore-property "IGNORE"
+  "Name of the property which values ignored when completing or exporting to vCard."
+  :type 'string)
+
 (defcustom org-contacts-last-read-mail-property "LAST_READ_MAIL"
   "Name of the property for contact last read email link storage."
   :type 'string)
 
 (defcustom org-contacts-icon-property "ICON"
   "Name of the property for contact icon."
-  :type 'string)
-
-(defcustom org-contacts-nickname-property "NICKNAME"
-  "Name of the property for IRC nickname match."
   :type 'string)
 
 (defcustom org-contacts-icon-size 32
@@ -166,11 +271,11 @@ The following replacements are available:
 (defcustom org-contacts-matcher
   (mapconcat #'identity
              (mapcar (lambda (x) (concat x "<>\"\""))
-                     (list org-contacts-email-property
-                           org-contacts-alias-property
-                           org-contacts-tel-property
-                           org-contacts-address-property
-                           org-contacts-birthday-property))
+                     (append org-contacts-email-properties
+                             org-contacts-alias-properties
+                             org-contacts-tel-properties
+                             org-contacts-address-properties
+                             org-contacts-birthday-properties))
              "|")
   "Matching rule for finding heading that are contacts.
 This can be a tag name, or a property check."
@@ -207,13 +312,26 @@ This overrides `org-email-link-description-format' if set."
 (declare-function std11-narrow-to-header "ext:std11")
 (declare-function std11-fetch-field "ext:std11")
 
+(defvar org-contacts-property-categories
+  `(("Address" . ,(list org-contacts-address-properties))
+    ("Alias" . ,(list org-contacts-alias-properties))
+    ("Anniversary" . ,(list org-contacts-anniv-properties))
+    ("Birthday" . ,(list org-contacts-birthday-properties))
+    ("Company". ,(list org-contacts-company-properties))
+    ("Department" . ,(list org-contacts-dept-properties))
+    ("Email" . ,(list org-contacts-email-properties))
+    ("Job Title" . ,(list org-contacts-job-properties))
+    ("Messenger" . ,(list org-contacts-chat-properties))
+    ("Phone" . ,(list org-contacts-tel-properties)))
+  "An alist matching the type of information to the property keys.")
+
 ;;;###autoload
 (defun org-contacts-files ()
   "Return list of Org files to use for contact management."
   (if org-contacts-files
       org-contacts-files
     (message "[org-contacts] ERROR: Your custom variable `org-contacts-files' is nil.
- Revert to `org-agenda-files' now.")
+Revert to `org-agenda-files' now.")
     (org-agenda-files t 'ifmode)))
 
 (defconst org-contacts-property-values-separators "[,; \f\t\n\r\v]+"
@@ -223,6 +341,7 @@ A regexp matching strings of whitespace, `,' and `;'.")
 
 (defvar org-contacts-keymap
   (let ((map (make-sparse-keymap)))
+    (define-key map "C" #'org-contacts-copy)
     (define-key map "M" #'org-contacts-view-send-email)
     (define-key map "i" #'org-contacts-view-switch-to-irc-buffer)
     map)
@@ -537,7 +656,7 @@ A group FOO is composed of contacts with the tag FOO."
                                   for email = (org-contacts-strip-link
                                                (or (car (org-contacts-split-property
                                                          (or
-                                                          (cdr (assoc-string org-contacts-email-property
+                                                          (cdr (assoc-string org-contacts-email-default-property
                                                                              (cl-caddr contact)))
                                                           ""))) ""))
                                   ;; If the user has an email address, append USER <EMAIL>.
@@ -564,7 +683,7 @@ See (org) Matching tags and properties for a complete description."
                        for email = (org-contacts-strip-link
                                     (or (car (org-contacts-split-property
                                               (or
-                                               (cdr (assoc-string org-contacts-email-property
+                                               (cdr (assoc-string org-contacts-email-default-property
                                                                   (cl-caddr contact)))
                                                "")))
                                         ""))
@@ -609,11 +728,16 @@ See (org) Matching tags and properties for a complete description."
                                       (or (cdr (assoc-string org-contacts-ignore-property
                                                              (nth 2 contact))) ""))
                    ;; Build the list of the user email addresses.
-                   for email-list = (org-contacts-remove-ignored-property-values
-                                     ignore-list
-                                     (org-contacts-split-property
-                                      (or (cdr (assoc-string org-contacts-email-property
-                                                             (nth 2 contact))) "")))
+                   for email-list = (let ((emails '()))
+                                      (dolist (property
+                                               org-contacts-email-properties)
+                                        (let ((email
+                                               (org-contacts-get-alist-value
+                                                (nth 2 contact)
+                                                property)))
+                                          (when email
+                                            (add-to-list 'emails email))))
+                                      emails)
                    ;; If the user has email addresses…
                    if email-list
                    ;; … append a list of USER <EMAIL>.
@@ -752,7 +876,7 @@ Usage: (add-hook \\='completion-at-point-functions
     (cl-cadar (or (org-contacts-filter
                    nil
                    nil
-                   (cons org-contacts-email-property (concat "\\b" (regexp-quote email) "\\b")))
+                   (cons org-contacts-email-default-property (concat "\\b" (regexp-quote email) "\\b")))
                   (when name
                     (org-contacts-filter
                      (concat "^" name "$")))))))
@@ -786,7 +910,7 @@ Format is a string matching the following format specification:
     (unless format (setq format org-contacts-birthday-format))
     (cl-loop for contact in (org-contacts-filter)
              for anniv = (let ((anniv (cdr (assoc-string
-                                            (or field org-contacts-birthday-property)
+                                            (or field org-contacts-birthday-default-property)
                                             (nth 2 contact)))))
                            (when anniv
                              (calendar-gregorian-from-absolute
@@ -805,14 +929,14 @@ Format is a string matching the following format specification:
                                              (format "%d%s" years (diary-ordinal-suffix years)))))))))
 
 (defun org-contacts--completing-read-date ( prompt _collection
-                                  &optional _predicate _require-match _initial-input
-                                  _hist def _inherit-input-method)
+                                            &optional _predicate _require-match _initial-input
+                                            _hist def _inherit-input-method)
   "Like `completing-read' but reads a date.
 Only PROMPT and DEF are really used."
   (org-read-date nil nil nil prompt nil def))
 
 (add-to-list 'org-property-set-functions-alist
-             `(,org-contacts-birthday-property . org-contacts--completing-read-date))
+             `(,org-contacts-birthday-default-property . org-contacts--completing-read-date))
 
 (defun org-contacts-template-name (&optional return-value)
   "Try to return the contact name for a template.
@@ -826,7 +950,7 @@ If not found return RETURN-VALUE or something that would ask the user."
 If not found return RETURN-VALUE or something that would ask the user."
   (or (cadr (org-contacts-gnus-get-name-email))
       return-value
-      (concat "%^{" org-contacts-email-property "}p")))
+      (concat "%^{" org-contacts-email-default-property "}p")))
 
 (defun org-contacts-gnus-store-last-mail ()
   "Store a link between mails and contacts.
@@ -857,11 +981,11 @@ This function should be called from `gnus-article-prepare-hook'."
 ;;====================================== org-contacts searching =====================================
 
 (defcustom org-contacts-identity-properties-list
-  `(,org-contacts-email-property
-    ,org-contacts-alias-property
-    ,org-contacts-tel-property
-    ,org-contacts-address-property
-    ,org-contacts-birthday-property)
+  `(,org-contacts-email-default-property
+    ,org-contacts-alias-default-property
+    ,org-contacts-tel-default-property
+    ,org-contacts-address-default-property
+    ,org-contacts-birthday-default-property)
   "Matching rule for finding heading that are contacts.
 This can be property key checking."
   :type '(repeat symbol)
@@ -898,8 +1022,8 @@ This can be property key checking."
                        (concat org-contacts-ahead-space-padding "   ")
                        (let ((org-property-separators (list (cons org-contacts-nickname-property "[,\ ]"))))
                          (org-entry-get headline org-contacts-nickname-property))
-                       (let ((org-property-separators (list (cons org-contacts-email-property "[,\ ]"))))
-                         (org-entry-get headline org-contacts-email-property))
+                       (let ((org-property-separators (list (cons org-contacts-email-default-property "[,\ ]"))))
+                         (org-entry-get headline org-contacts-email-default-property))
                        "\n"))
          (middle-line-length (let ((length (- (abs org-tags-column)
                                               (length (string-join tags ":"))
@@ -1030,11 +1154,11 @@ This can be property key checking."
 
 (defun org-contacts-check-mail-address (mail)
   "Add MAIL address to contact at point if it does not have it."
-  (let ((mails (org-entry-get (point) org-contacts-email-property)))
+  (let ((mails (org-entry-get (point) org-contacts-email-default-property)))
     (unless (member mail (split-string mails))
       (when (yes-or-no-p
              (format "Do you want to add this address to %s?" (org-get-heading t)))
-        (org-set-property org-contacts-email-property (concat mails " " mail))))))
+        (org-set-property org-contacts-email-default-property (concat mails " " mail))))))
 
 (defun org-contacts-gnus-check-mail-address ()
   "Check that contact has the current address recorded.
@@ -1104,7 +1228,7 @@ user."
 If not found return RETURN-VALUE or something that would ask the user."
   (or (cadr (org-contacts-wl-get-name-email))
       return-value
-      (concat "%^{" org-contacts-email-property "}p")))
+      (concat "%^{" org-contacts-email-default-property "}p")))
 
 (defun org-contacts-view-send-email (&optional ask)
   "Send email to the contact at point.
@@ -1113,18 +1237,13 @@ address."
   (interactive "P")
   (let ((marker (org-get-at-bol 'org-hd-marker)))
     (org-with-point-at marker
-      (let ((emails (org-entry-get (point) org-contacts-email-property)))
-        (if emails
-            (let ((email-list (org-contacts-split-property emails)))
-              (if (and (= (length email-list) 1) (not ask))
-                  (compose-mail (org-contacts-format-email
-                                 (org-get-heading t) emails))
-                (let ((email (completing-read "Send mail to which address: " email-list)))
-                  (setq email (org-contacts-strip-link email))
-                  (org-contacts-check-mail-address email)
-                  (compose-mail (org-contacts-format-email (org-get-heading t) email)))))
+      (let ((email-list (org-contacts-get-alist org-contacts-email-properties)))
+        (let ((email (org-contacts-get-alist-value email-list ask)))
+          (setq email (org-contacts-strip-link email))
+          (org-contacts-check-mail-address email)
+          (compose-mail (org-contacts-format-email (org-get-heading t) email))
           (error (format "This contact has no mail address set (no %s property)"
-                         org-contacts-email-property)))))))
+                         org-contacts-email-default-property)))))))
 
 (defun org-contacts-get-icon (&optional pom)
   "Get icon for contact at POM."
@@ -1161,7 +1280,7 @@ address."
     (when org-contacts-icon-use-gravatar
       (defvar gravatar-size)
       (let* ((gravatar-size org-contacts-icon-size)
-             (email-list (org-entry-get pom org-contacts-email-property))
+             (email-list (org-entry-get pom org-contacts-email-default-property))
              (gravatar
               (when email-list
                 (cl-loop for email in (org-contacts-split-property email-list)
@@ -1267,13 +1386,13 @@ to do our best."
   (let* ((properties (nth 2 contact))
          (name (org-contacts-vcard-escape (car contact)))
          (n (org-contacts-vcard-encode-name name))
-         (email (cdr (assoc-string org-contacts-email-property properties)))
+         (email (cdr (assoc-string org-contacts-email-default-property properties)))
          (tel (cdr (assoc-string org-contacts-tel-property properties)))
          (ignore-list (cdr (assoc-string org-contacts-ignore-property properties)))
          (ignore-list (when ignore-list
                         (org-contacts-split-property ignore-list)))
          (note (cdr (assoc-string org-contacts-note-property properties)))
-         (bday (org-contacts-vcard-escape (cdr (assoc-string org-contacts-birthday-property properties))))
+         (bday (org-contacts-vcard-escape (cdr (assoc-string org-contacts-birthday-default-property properties))))
          (addr (cdr (assoc-string org-contacts-address-property properties)))
          (nick (org-contacts-vcard-escape (cdr (assoc-string org-contacts-nickname-property properties))))
          (head (format "BEGIN:VCARD\nVERSION:3.0\nN:%s\nFN:%s\n" n name))
@@ -1593,6 +1712,56 @@ Each element has the form (NAME . (FILE . POSITION))."
   ;; clean nil and empty string "" from result.
   (delete ""
           (delete nil org-contacts-emails-list)))
+(defun org-contacts-get-alist (property-list)
+  "Return an alist for org contact properties in PROPERTY-LIST.
+The alist is a list of cons cells matching each property in PROPERTY-LIST with
+the corresponding value of that property under the contact heading."
+  (let (list)
+    (dolist (element property-list list)
+      (when (org-entry-get (point) element)
+        (setq list (append list
+                           (list (cons element
+                                       (org-entry-get (point) element)))))))))
+
+(defun org-contacts-get-alist-value (alist &optional key ask)
+  "Return the value of the ALIST using KEY and process the output."
+  (if key
+      (let ((value (cdr (assoc key alist))))
+        (if value
+            (org-contacts-strip-link value)
+          value))
+    (if (and (= (length alist) 1) (not ask))
+        (org-contacts-strip-link (cdr (car alist)))
+      (let ((selection (completing-read "Select which item: " alist)))
+        (org-contacts-strip-link (cdr (assoc selection alist)))))))
+
+(defun org-contacts-props-from-category (category)
+  "Return the list of contact properties matching CATEGORY.
+CATEGORY are those defined in `org-contacts-property-categories' The function
+will then return the matching list of properties (e.g. `Address' returns
+the list `org-contacts-address-properties')."
+  (cadr (assoc category org-contacts-property-categories)))
+
+(defun org-contacts-copy (&optional ask)
+  "Copy a contact property value for the contact at point to the kill ring.
+If ASK is set, ask for the email address even if there's only one
+address."
+  (interactive)
+  (let ((marker (org-get-at-bol 'org-hd-marker)))
+    (org-with-point-at marker
+      (let ((category (completing-read "Select item to copy: "
+                                       org-contacts-property-categories)))
+        (let ((alist (org-contacts-get-alist
+                      (org-contacts-props-from-category category))))
+          (unless alist
+            (error (format "No %s properties are defined for this contact" category)))
+          (let ((value (org-contacts-get-alist-value alist
+                                                     ask)))
+            (message "Hello")
+            (when (= (length value) 0)
+              (error (format "No information found for %s." (caar alist))))
+            (kill-new value)
+            (message (format "Added to kill ring: %s" value))))))))
 
 (defun org-contacts-mailto-link-completion (&optional _arg)
   "Org mode link `mailto:' completion with `org-contacts' emails."
