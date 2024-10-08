@@ -1677,6 +1677,8 @@ Each element has the form (NAME . (FILE . POSITION))."
 (defvar org-contacts-emails-list nil
   "A list variable of all `org-contacts' emails.")
 
+
+;; TODO Update function to look for any email property
 (defun org-contacts-mailto-link--get-all-emails ()
   "Retrieve all `org-contacts' EMAIL property values."
   (setq org-contacts-emails-list
@@ -1704,6 +1706,7 @@ Each element has the form (NAME . (FILE . POSITION))."
   ;; clean nil and empty string "" from result.
   (delete ""
           (delete nil org-contacts-emails-list)))
+
 (defun org-contacts-get-alist (property-list)
   "Return an alist for org contact properties in PROPERTY-LIST.
 The alist is a list of cons cells matching each property in PROPERTY-LIST with
@@ -1749,7 +1752,6 @@ address."
             (error (format "No %s properties are defined for this contact" category)))
           (let ((value (org-contacts-get-alist-value alist
                                                      ask)))
-            (message "Hello")
             (when (= (length value) 0)
               (error (format "No information found for %s." (caar alist))))
             (kill-new value)
