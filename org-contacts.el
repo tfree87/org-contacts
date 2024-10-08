@@ -228,14 +228,6 @@ The following replacements are available:
   "The default telephone number name used for templates."
   :type 'string)
 
-(defcustom org-contacts-tel-properties '("PHONE"
-                                         "WORK_PHONE"
-                                         "MOBILE_PHONE"
-                                         "HOME_PHONE"
-                                         "OTHER_PHONE")
-  "A list of properties defining telephone addresses for the contact."
-  :type '(repeat string))
-
 (defcustom org-contacts-ignore-property "IGNORE"
   "Name of the property which values ignored when completing or exporting to vCard."
   :type 'string)
